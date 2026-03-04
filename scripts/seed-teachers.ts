@@ -11,7 +11,7 @@ const teacherSchema = z.object({
   photo_url: z.string().nullable(),
   photo_filename: z.string().nullable(),
   courses: z.array(z.string()),
-  created_at: z.string()
+  created_at: z.string().optional()
 });
 
 async function run() {
@@ -26,14 +26,17 @@ async function run() {
   const seedPath = path.join(process.cwd(), "teachers_seed.json");
   const file = await readFile(seedPath, "utf-8");
   const parsed = z.array(teacherSchema).parse(JSON.parse(file));
+  const teachersToUpsert = parsed.map(({ created_at, ...teacher }) =>
+    created_at ? { ...teacher, created_at } : teacher
+  );
 
-  const { error } = await supabase.from("teachers").upsert(parsed, { onConflict: "teacher_id" });
+  const { error } = await supabase.from("teachers").upsert(teachersToUpsert, { onConflict: "teacher_id" });
 
   if (error) {
     throw new Error(`Failed to seed teachers: ${error.message}`);
   }
 
-  console.log(`Seeded ${parsed.length} teacher records.`);
+  console.log(`Seeded ${teachersToUpsert.length} teacher records.`);
 }
 
 run().catch((error) => {
