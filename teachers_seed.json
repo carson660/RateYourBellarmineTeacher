@@ -1,0 +1,32 @@
+[
+  {
+    "teacher_id": 1,
+    "name_en": "Mr. Michael Chan",
+    "slug": "michael-chan",
+    "department": "Mathematics",
+    "photo_url": "https://images.unsplash.com/photo-1560250097-0b93528c311a",
+    "photo_filename": "michael-chan.jpg",
+    "courses": ["Algebra II", "AP Calculus AB"],
+    "created_at": "2024-01-10T00:00:00Z"
+  },
+  {
+    "teacher_id": 2,
+    "name_en": "Ms. Sarah Lee",
+    "slug": "sarah-lee",
+    "department": "Science",
+    "photo_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80",
+    "photo_filename": "sarah-lee.jpg",
+    "courses": ["Biology", "AP Biology"],
+    "created_at": "2024-01-10T00:00:00Z"
+  },
+  {
+    "teacher_id": 3,
+    "name_en": "Dr. Anthony Wong",
+    "slug": "anthony-wong",
+    "department": "English",
+    "photo_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+    "photo_filename": "anthony-wong.jpg",
+    "courses": ["English 10", "AP Literature"],
+    "created_at": "2024-01-10T00:00:00Z"
+  }
+]
