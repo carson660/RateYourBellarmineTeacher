@@ -90,6 +90,14 @@ npm run seed:teachers
 
 The script upserts teacher data using `teacher_id` conflict resolution.
 
+### Seeding Troubleshooting
+
+If `npm run seed:teachers` succeeds but the page still shows no teachers, check:
+
+1. **Environment variables** are pointing to the same Supabase project your app is using.
+2. **RLS policy** allows `anon` role to `select` from `teachers`.
+3. The seed file (`teachers_seed.json`) does not include `created_at`; the seed script now treats this as optional and lets Postgres defaults populate timestamps.
+
 ## API Routes
 
 - `POST /api/reviews/create` – validate and create anonymous reviews
@@ -103,4 +111,3 @@ The script upserts teacher data using `teacher_id` conflict resolution.
 2. Import project in Vercel.
 3. Set environment variables in Vercel project settings.
 4. Deploy.
-
