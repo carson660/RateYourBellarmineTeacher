@@ -1,3 +1,6 @@
+// ensure .env variables are loaded when running via tsx
+import "dotenv/config";
+
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { createClient } from "@supabase/supabase-js";
@@ -11,7 +14,8 @@ const teacherSchema = z.object({
   photo_url: z.string().nullable(),
   photo_filename: z.string().nullable(),
   courses: z.array(z.string()),
-  created_at: z.string()
+  // seed data doesn’t include timestamps; let PostgreSQL default them
+  created_at: z.string().optional()
 });
 
 async function run() {
@@ -19,7 +23,9 @@ async function run() {
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   if (!supabaseUrl || !supabaseAnonKey) {
+    console.error("");
     throw new Error("Missing Supabase environment variables.");
+
   }
 
   const supabase = createClient(supabaseUrl, supabaseAnonKey);
@@ -37,6 +43,12 @@ async function run() {
 }
 
 run().catch((error) => {
-  console.error(error);
+  // avoid console.error inspecting deep or circular objects
+  if (error instanceof Error) {
+    console.error("Seed script failed:", error.message);
+    console.error(error.stack);
+  } else {
+    console.error("Seed script failed with non-error:", error);
+  }
   process.exit(1);
 });
