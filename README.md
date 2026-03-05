@@ -73,6 +73,7 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 
 ```bash
 npm install
+npm install dotenv --save-dev
 npm run dev
 ```
 
