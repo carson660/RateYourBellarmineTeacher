@@ -10,6 +10,18 @@ type SearchParams = {
   sort?: string;
 };
 
+const departmentOptions = [
+  "Science",
+  "Mathematics",
+  "English",
+  "Fine Arts",
+  "Social Studies",
+  "Academic Center of Excellence",
+  "PE/Health",
+  "Theology",
+  "World Language"
+];
+
 async function getTeachers(params: SearchParams): Promise<TeacherWithStats[]> {
   const query = new URLSearchParams();
   Object.entries(params).forEach(([key, value]) => {
@@ -37,7 +49,14 @@ export default async function TeachersPage({ searchParams }: { searchParams: Sea
         <h1 className="mb-3 text-2xl font-bold">Teacher Directory</h1>
         <form className="grid grid-cols-1 gap-3 md:grid-cols-4" method="GET">
           <input name="search" placeholder="Search by teacher name" className="rounded-md border p-2" defaultValue={searchParams.search} />
-          <input name="department" placeholder="Department" className="rounded-md border p-2" defaultValue={searchParams.department} />
+          <select name="department" defaultValue={searchParams.department ?? ""} className="rounded-md border p-2">
+            <option value="">All departments</option>
+            {departmentOptions.map((department) => (
+              <option key={department} value={department}>
+                {department}
+              </option>
+            ))}
+          </select>
           <input name="course" placeholder="Course" className="rounded-md border p-2" defaultValue={searchParams.course} />
           <select name="sort" defaultValue={searchParams.sort ?? "highest_rating"} className="rounded-md border p-2">
             <option value="highest_rating">Highest rating</option>
