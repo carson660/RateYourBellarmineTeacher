@@ -17,6 +17,7 @@ const initialValues = {
 export default function ReviewForm({ teacherId }: ReviewFormProps) {
   const [values, setValues] = useState(initialValues);
   const [status, setStatus] = useState<string>("");
+  const scoreOptions = [1, 2, 3, 4, 5];
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -57,16 +58,19 @@ export default function ReviewForm({ teacherId }: ReviewFormProps) {
         ].map((field) => (
           <label key={field.key} className="text-sm">
             {field.label}
-            <input
-              type="number"
-              min={1}
-              max={5}
+            <select
               value={values[field.key as keyof typeof values] as number}
               onChange={(event) =>
                 setValues((prev) => ({ ...prev, [field.key]: Number(event.target.value) }))
               }
               className="mt-1 w-full rounded-md border p-2"
-            />
+            >
+              {scoreOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
           </label>
         ))}
       </div>
