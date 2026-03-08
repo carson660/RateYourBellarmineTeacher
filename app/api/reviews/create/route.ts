@@ -10,7 +10,7 @@ const createReviewSchema = z.object({
   difficulty: z.number().int().min(1).max(5),
   workload: z.number().int().min(1).max(5),
   tags: z.array(z.string().min(1).max(30)).max(8).default([]),
-  comment: z.string().trim().min(10).max(600)
+  comment: z.string().trim().min(1).max(600)
 });
 
 export async function POST(request: NextRequest) {
