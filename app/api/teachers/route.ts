@@ -2,21 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { supabase } from "@/lib/supabaseClient";
 
-const departmentSchema = z.enum([
-  "Science",
-  "Mathematics",
-  "English",
-  "Fine Arts",
-  "Social Studies",
-  "Academic Center of Excellence",
-  "PE/Health",
-  "Theology",
-  "World Language"
-]);
-
 const querySchema = z.object({
   search: z.string().optional(),
-  department: departmentSchema.optional(),
+  department: z.string().min(1).optional(),
   course: z.string().optional(),
   sort: z.enum(["highest_rating", "most_reviews", "newest_reviews"]).optional()
 });

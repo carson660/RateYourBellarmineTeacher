@@ -1,10 +1,18 @@
-# RateYourBellarmineTeacher
+# Rate My Rate
 
-A production-ready RateMyProfessor-style web app for Bellarmine students to browse teachers and submit anonymous reviews.
+A production-ready RateMyProfessor-style web app starter for any school. Students can browse teachers and submit anonymous reviews.
+
+## What changed from the Bellarmine version
+
+- Branding is now school-agnostic.
+- Site title is now **Rate Your Teacher**.
+- You can customize school/platform name using environment variables.
+- Teacher filtering supports any department value (no fixed Bellarmine-only enum).
+- Seed data file is now `teacher_seed.json` and includes generic example teachers.
 
 ## Project Overview
 
-This project is built with:
+Built with:
 
 - **Next.js 14 (App Router) + TypeScript**
 - **Supabase (PostgreSQL)** for data storage
@@ -12,7 +20,7 @@ This project is built with:
 - **Zod** for runtime validation
 - **Vercel** for deployment
 
-Core features include:
+Core features:
 
 - Teacher directory with search/filter/sort
 - Teacher profile pages with review statistics
@@ -20,7 +28,7 @@ Core features include:
 - 24-hour submission rate limiting (5 reviews max)
 - Review reporting and moderation support
 
-## Database Setup (Supabase)
+## 1) Database Setup (Supabase)
 
 Create these tables in Supabase SQL editor:
 
@@ -58,7 +66,7 @@ create table if not exists reports (
 );
 ```
 
-## Environment Variables
+## 2) Environment Variables
 
 Create `.env.local`:
 
@@ -67,23 +75,52 @@ NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ANON_HASH_SALT=your_strong_random_secret
 NEXT_PUBLIC_APP_URL=http://localhost:3000
+
+# optional branding
+NEXT_PUBLIC_PLATFORM_NAME=Rate My Rate
+NEXT_PUBLIC_SCHOOL_NAME=Your School
 ```
 
-## Local Setup
+## 3) Local Setup
 
 ```bash
 npm install
-npm install dotenv --save-dev
 npm run dev
 ```
 
 Open: `http://localhost:3000`
 
-## Data Seeding
+## 4) Add your own school teachers (`teacher_seed.json`)
 
-Teacher seed data lives in `teachers_seed.json`.
+Teacher seed data lives in **`teacher_seed.json`**.
 
-Run:
+Each teacher object must include:
+
+- `teacher_id` (number, unique)
+- `name_en` (string)
+- `slug` (string, unique URL slug, e.g. `jane-smith`)
+- `department` (string, any value)
+- `photo_url` (string or `null`)
+- `photo_filename` (string or `null`)
+- `courses` (string array)
+
+Example:
+
+```json
+[
+  {
+    "teacher_id": 101,
+    "name_en": "Jane Smith",
+    "slug": "jane-smith",
+    "department": "Mathematics",
+    "photo_url": null,
+    "photo_filename": null,
+    "courses": ["Algebra II", "AP Statistics"]
+  }
+]
+```
+
+Seed data into Supabase:
 
 ```bash
 npm run seed:teachers
@@ -98,10 +135,9 @@ The script upserts teacher data using `teacher_id` conflict resolution.
 - `GET /api/teachers` – list/filter/sort teachers with aggregated stats
 - `GET /api/teacher/[slug]` – fetch one teacher and visible reviews
 
-## Deployment (Vercel)
+## Deploy (Vercel)
 
 1. Push repository to GitHub.
 2. Import project in Vercel.
-3. Set environment variables in Vercel project settings.
+3. Set all environment variables in Vercel project settings.
 4. Deploy.
-
