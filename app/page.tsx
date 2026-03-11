@@ -1,11 +1,16 @@
 import Link from "next/link";
+import { PLATFORM_NAME, SCHOOL_NAME } from "./config";
 
 export default function HomePage() {
   return (
     <section className="space-y-4 rounded-xl bg-white p-8 shadow-sm">
-      <h1 className="text-3xl font-bold">Rate Your Bellarmine Teacher</h1>
+      <h1 className="text-3xl font-bold">Rate Your Teacher</h1>
       <p className="text-slate-600">
-        Browse teacher profiles, read anonymous reviews, and share your classroom experience.
+        {PLATFORM_NAME} helps {SCHOOL_NAME} students browse teacher profiles, read anonymous reviews, and share
+        classroom experiences.
+      </p>
+      <p className="text-slate-600">
+        Running this for another campus? Update <code>NEXT_PUBLIC_SCHOOL_NAME</code> and seed your own teacher list.
       </p>
       <Link
         href="/teachers"

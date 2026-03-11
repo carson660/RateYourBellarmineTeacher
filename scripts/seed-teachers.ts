@@ -29,7 +29,7 @@ async function run() {
   }
 
   const supabase = createClient(supabaseUrl, supabaseAnonKey);
-  const seedPath = path.join(process.cwd(), "teachers_seed.json");
+  const seedPath = path.join(process.cwd(), "teacher_seed.json");
   const file = await readFile(seedPath, "utf-8");
   const parsed = z.array(teacherSchema).parse(JSON.parse(file));
 

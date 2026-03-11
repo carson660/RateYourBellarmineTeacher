@@ -1,0 +1,47 @@
+[
+  {
+    "teacher_id": 1,
+    "name_en": "Alex Carter",
+    "slug": "alex-carter",
+    "department": "Science",
+    "photo_url": null,
+    "photo_filename": null,
+    "courses": ["Biology", "Environmental Science"]
+  },
+  {
+    "teacher_id": 2,
+    "name_en": "Priya Shah",
+    "slug": "priya-shah",
+    "department": "Mathematics",
+    "photo_url": null,
+    "photo_filename": null,
+    "courses": ["Algebra II", "AP Statistics"]
+  },
+  {
+    "teacher_id": 3,
+    "name_en": "Miguel Alvarez",
+    "slug": "miguel-alvarez",
+    "department": "World Language",
+    "photo_url": null,
+    "photo_filename": null,
+    "courses": ["Spanish II", "Spanish III"]
+  },
+  {
+    "teacher_id": 4,
+    "name_en": "Emily Johnson",
+    "slug": "emily-johnson",
+    "department": "English",
+    "photo_url": null,
+    "photo_filename": null,
+    "courses": ["English Literature", "Creative Writing"]
+  },
+  {
+    "teacher_id": 5,
+    "name_en": "Daniel Kim",
+    "slug": "daniel-kim",
+    "department": "Social Studies",
+    "photo_url": null,
+    "photo_filename": null,
+    "courses": ["World History", "Civics"]
+  }
+]
